@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "demo.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "demo.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "demo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "demo.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: SPRING_PROFILE_ACTIVE
+            value: {{ .Values.springProfilesActive }}
+          - name: REDIS_HOST
+            value: {{ .Values.redisSvcName }}
+          - name: REDIS_PASS
+            valueFrom: 
+              secretKeyRef:
+                name: {{ .Values.redisSecretName }}
+                key: redis-password
+          - name: DB_HOST
+            value: {{ .Values.mysqlSvcName }}
+          - name: DB_NAME
+            value: demo
+          - name: DB_PASS
+            valueFrom: 
+              secretKeyRef:
+                name: {{ .Values.mysqlSecretName }}
+                key: DB_PASS
+          - name: DB_USER
+            valueFrom: 
+              secretKeyRef:
+                name: {{ .Values.mysqlSecretName }}
+                key: DB_USER
+          - name: K8S_SVC_NAME
+            value: {{ include "demo.fullname" . }}
+          - name: SERVER_NAME
+            value: {{ include "demo.fullname" . }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,1 @@
+helm install redis bitnami/redis -f values.yaml --namespace desenv

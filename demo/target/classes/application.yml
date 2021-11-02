@@ -1,0 +1,24 @@
+k8s:
+  service:
+    name: ${K8S_SVC_NAME:unknow}
+
+server:
+  port: ${HTTP_PORT:${HTTPS_PORT:8085}}
+  name: ${SERVER_NAME:unknow}
+
+spring:
+  cache:
+    type: redis
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASS:""}
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/${DB_NAME:requisicao}?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: ${DB_USER:root}
+    password: ${DB_PASS:root}
+
+  jpa:
+    hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate.ddl-auto: validate

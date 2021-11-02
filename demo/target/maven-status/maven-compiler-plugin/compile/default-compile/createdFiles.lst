@@ -1,0 +1,6 @@
+com/test/helm/demo/config/RedisConfiguration.class
+com/test/helm/demo/services/RequisicaoService.class
+com/test/helm/demo/DemoApplication.class
+com/test/helm/demo/domains/RequisicaoModel.class
+com/test/helm/demo/repositories/RequisicaoRepository.class
+com/test/helm/demo/controllers/RequisicaoController.class

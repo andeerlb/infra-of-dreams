@@ -1,0 +1,10 @@
+architecture: standalone
+
+global:
+  redis:
+    password: ""
+  metrics:
+    enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: "default"

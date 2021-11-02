@@ -1,0 +1,6 @@
+/mnt/c/Users/Anderson/Documents/projects/infra-of-dreams/demo/src/main/java/com/test/helm/demo/domains/RequisicaoModel.java
+/mnt/c/Users/Anderson/Documents/projects/infra-of-dreams/demo/src/main/java/com/test/helm/demo/repositories/RequisicaoRepository.java
+/mnt/c/Users/Anderson/Documents/projects/infra-of-dreams/demo/src/main/java/com/test/helm/demo/controllers/RequisicaoController.java
+/mnt/c/Users/Anderson/Documents/projects/infra-of-dreams/demo/src/main/java/com/test/helm/demo/DemoApplication.java
+/mnt/c/Users/Anderson/Documents/projects/infra-of-dreams/demo/src/main/java/com/test/helm/demo/config/RedisConfiguration.java
+/mnt/c/Users/Anderson/Documents/projects/infra-of-dreams/demo/src/main/java/com/test/helm/demo/services/RequisicaoService.java
